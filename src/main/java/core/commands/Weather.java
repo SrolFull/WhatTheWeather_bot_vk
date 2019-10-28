@@ -11,6 +11,8 @@ import vk.VKManager;
 import java.io.IOException;
 public class Weather extends Command {
     private static final Logger log = LoggerFactory.getLogger(Weather.class);
+
+
     public Weather() {
         super("Weather");
     }

@@ -17,5 +17,4 @@ public class WeatherParser {
         Elements elements = doc.select("span.dw-into");
         return city+"\n"+elements.text().split("Подробнее")[0];
     }
-
 }

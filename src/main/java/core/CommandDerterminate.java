@@ -3,9 +3,6 @@ package core;
 import com.vk.api.sdk.objects.messages.Message;
 import core.commands.Unknown;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Collection;
 
 class CommandDerterminate {

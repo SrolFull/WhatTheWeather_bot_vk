@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 
@@ -28,7 +27,7 @@ public class VKServer {
         }
     }
 
-    public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException, ParseException {
+    public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException {
         log.info("Running server...");
         Timer tm = new Timer();
         tm.schedule(new ReminTask(),6600000, 86400000);
