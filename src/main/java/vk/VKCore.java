@@ -21,7 +21,7 @@ class VKCore {
     private VkApiClient vk;
     private static int ts;
     private GroupActor actor;
-    private static int maxMsgId =    -1;
+    private static int maxMsgId = -1;
 
     VKCore() throws ClientException, ApiException {
         TransportClient transportClient = HttpTransportClient.getInstance();
