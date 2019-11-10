@@ -1,1 +1,1 @@
-hoby: java VKserver.java
+web: java -jar untitled.jar
