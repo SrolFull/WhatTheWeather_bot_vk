@@ -2,6 +2,9 @@
   <artifact type="jar" name="untitled:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/untitled_jar</output-path>
     <root id="archive" name="untitled.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="untitled.main" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.0.48.Final/3fd2bd39bf99edef558f1beaece7cc4d6a13aa11/netty-buffer-4.0.48.Final.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vk.api/sdk/0.5.12/6b6b9e2c1c6c6705f02ce99590ee28c7d89ccf18/sdk-0.5.12.jar" path-in-jar="/" />

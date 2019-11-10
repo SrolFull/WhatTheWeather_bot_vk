@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.sqlite.JDBC;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class db {
     private static final Logger log = LoggerFactory.getLogger(db.class);
@@ -40,13 +42,15 @@ public class db {
     }
 
     public void addSubcriber(Integer sub_id) {
-        try (PreparedStatement statement = this.connection.prepareStatement(
-                "INSERT INTO subs(sub_id) " +
-                        "VALUES(?)")) {
-            statement.setObject(1, sub_id);
-            statement.execute();
-        } catch (SQLException e) {
-            log.error(String.valueOf(e));
+        if (!isIdExist(sub_id)) {
+            try (PreparedStatement statement = this.connection.prepareStatement(
+                    "INSERT INTO subs(sub_id) " +
+                            "VALUES(?)")) {
+                statement.setObject(1, sub_id);
+                statement.execute();
+            } catch (SQLException e) {
+                log.error(String.valueOf(e));
+            }
         }
     }
 
@@ -60,4 +64,19 @@ public class db {
         }
     }
 
+
+    private boolean isIdExist(int user_id){
+        boolean exist = false;
+        try (PreparedStatement statement = this.connection.prepareStatement(
+                "SELECT sub_id FROM subs WHERE sub_id = ?")) {
+                statement.setInt(1,user_id);
+                try (ResultSet resultset = statement.executeQuery()) {
+                    exist = resultset.next();
+                }
+            } catch (SQLException e) {
+            log.error(String.valueOf(e));
+        }
+        log.info(String.valueOf(exist));
+        return exist;
+    }
 }
