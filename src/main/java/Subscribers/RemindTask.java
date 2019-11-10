@@ -6,7 +6,7 @@ import vk.VKServer;
 import java.util.List;
 import java.util.TimerTask;
 
-public class ReminTask extends TimerTask {
+public class RemindTask extends TimerTask {
     @Override
     public void run() {
         SendMessages();

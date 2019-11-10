@@ -1,7 +1,7 @@
 package vk;
 
 import DB.db;
-import Subscribers.ReminTask;
+import Subscribers.RemindTask;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.Message;
@@ -30,7 +30,7 @@ public class VKServer {
     public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException {
         log.info("Running server...");
         Timer tm = new Timer();
-        tm.schedule(new ReminTask(),6600000, 86400000);
+        tm.schedule(new RemindTask(),6600000, 86400000);
         //initialaze db
         UsersDb = db.getInstance();
         while (true) {
