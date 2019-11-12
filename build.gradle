@@ -2,6 +2,15 @@ plugins {
     id 'java'
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Main-Class': 'vk.VKServer'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8

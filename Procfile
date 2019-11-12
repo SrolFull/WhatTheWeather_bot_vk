@@ -1,1 +1,1 @@
-web: java -jar out/artifacts/untitled_jar/untitled.jar
+web: java -jar build/untitled-1.0-SNAPSHOT.jar
