@@ -1,1 +1,1 @@
-web: java -jar build/libs/untitled-1.0-SNAPSHOT.jar
+web: java -jar untitled-1.0-SNAPSHOT.jar
