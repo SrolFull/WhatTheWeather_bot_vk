@@ -8,9 +8,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class WeatherParser {
-    private String city = "yekaterinburg";
     private Document doc;
-    public WeatherParser() throws IOException {
+    private String city = "yekaterinburg";
+    public WeatherParser( ) throws IOException {
         doc = Jsoup.connect(String.format("https://world-weather.ru/pogoda/russia/%s/",city)).get();
     }
     public String getWeatherTodayDescription() {

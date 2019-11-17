@@ -1,1 +1,1 @@
-web: java -jar untitled-1.0-SNAPSHOT.jar
+worker: java -jar untitled-1.0-SNAPSHOT.jar

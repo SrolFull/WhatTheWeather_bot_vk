@@ -12,6 +12,7 @@ class CommandDerterminate {
         for (Command command : commands
         ) {
             if (command.getName().equals(body.split(" ")[0])) {
+                if (command.getName().equals("Subscibe"))
                 return command;
             }
         }
