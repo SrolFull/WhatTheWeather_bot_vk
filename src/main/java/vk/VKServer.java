@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 
@@ -29,8 +32,11 @@ public class VKServer {
 
     public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException {
         log.info("Running server...");
+        //init remind task
         Timer tm = new Timer();
-        tm.schedule(new RemindTask(),6600000, 86400000);
+        Calendar start_calendar = new GregorianCalendar(2019, Calendar.NOVEMBER,18,7,30,0);
+        Date start_date = start_calendar.getTime();
+        tm.schedule(new RemindTask(),start_date, 86400000);
         //initialaze db
         UsersDb = db.getInstance();
         while (true) {
