@@ -3,7 +3,7 @@ package Subscribers;
 import core.commands.Weather;
 import vk.VKServer;
 
-import java.util.List;
+import java.util.Map;
 import java.util.TimerTask;
 
 public class RemindTask extends TimerTask {
@@ -12,9 +12,7 @@ public class RemindTask extends TimerTask {
         SendMessages();
     }
     private static void SendMessages(){
-        List<Integer> Subs = VKServer.UsersDb.getSubscribers();
-        for (Integer sub_id : Subs){
-            Weather.exec(sub_id);
-        }
+        Map<Integer, String> Subs = VKServer.UsersDb.getSubscribers();
+        Subs.forEach(Weather::exec);
     }
 }

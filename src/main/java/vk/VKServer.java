@@ -5,14 +5,12 @@ import Subscribers.RemindTask;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.Message;
+import file.ReadCity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Timer;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 
 import static java.util.concurrent.Executors.newCachedThreadPool;
@@ -22,6 +20,8 @@ public class VKServer {
     private static final Logger log = LoggerFactory.getLogger(VKServer.class);
     private static VKCore vkCore;
     public static db UsersDb;
+    public static List<String> Cites;
+
     static {
         try {
             vkCore = new VKCore();
@@ -32,9 +32,10 @@ public class VKServer {
 
     public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException {
         log.info("Running server...");
+        Cites = ReadCity.getCites();
         //init remind task
         Timer tm = new Timer();
-        Calendar start_calendar = new GregorianCalendar(2019, Calendar.NOVEMBER,18,7,30,0);
+        Calendar start_calendar = new GregorianCalendar(2019, Calendar.NOVEMBER,18,7,0,0);
         Date start_date = start_calendar.getTime();
         tm.schedule(new RemindTask(),start_date, 86400000);
         //initialaze db

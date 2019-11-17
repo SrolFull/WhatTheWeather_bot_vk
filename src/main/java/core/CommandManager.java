@@ -1,23 +1,20 @@
 package core;
 
-import core.commands.Subscribe;
-import core.commands.Unknown;
-import core.commands.Unsubscribe;
-import core.commands.Weather;
+import core.commands.*;
 
 import java.util.HashSet;
 
-class CommandManager {
+public class CommandManager {
     private static HashSet<Command> commands = new HashSet<>();
 
     static {
-        commands.add(new Unknown());
         commands.add(new Weather());
         commands.add(new Subscribe());
         commands.add(new Unsubscribe());
+        commands.add(new Help());
     }
 
-    static HashSet<Command> getCommands(){
+    public static HashSet<Command> getCommands(){
         return commands;
     }
 }

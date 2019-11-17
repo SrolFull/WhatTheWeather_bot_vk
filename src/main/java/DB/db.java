@@ -5,9 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.sqlite.JDBC;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class db {
     private static final Logger log = LoggerFactory.getLogger(db.class);
@@ -26,27 +25,28 @@ public class db {
         this.connection = DriverManager.getConnection(CON_STR);
     }
 
-    public List<Integer> getSubscribers() {
+    public Map<Integer, String> getSubscribers() {
         try (Statement statement = this.connection.createStatement()) {
-            List<Integer> products = new ArrayList<>();
-            ResultSet resultSet = statement.executeQuery("SELECT sub_id FROM subs");
+            ResultSet resultSet = statement.executeQuery("SELECT sub_id, city FROM subs");
+            Map<Integer,String> products = new HashMap<>();
             while (resultSet.next()) {
-                products.add(resultSet.getInt("sub_id"));
+                products.put(resultSet.getInt("sub_id"),resultSet.getString("city"));
             }
             return products;
 
         } catch (SQLException e) {
             log.error(String.valueOf(e));
-            return Collections.emptyList();
+            return new HashMap<>();
         }
     }
 
-    public void addSubcriber(Integer sub_id) {
+    public void addSubcriber(Integer sub_id, String city) {
         if (!isIdExist(sub_id)) {
             try (PreparedStatement statement = this.connection.prepareStatement(
-                    "INSERT INTO subs(sub_id) " +
-                            "VALUES(?)")) {
-                statement.setObject(1, sub_id);
+                    "INSERT INTO subs(sub_id, city) " +
+                            "VALUES(?, ?)")) {
+                statement.setInt(1,sub_id);
+                statement.setString(2,city);
                 statement.execute();
             } catch (SQLException e) {
                 log.error(String.valueOf(e));
@@ -57,7 +57,7 @@ public class db {
     public void deleteSubscriber(int user_id) {
         try (PreparedStatement statement = this.connection.prepareStatement(
                 "DELETE FROM subs WHERE sub_id = ?")) {
-            statement.setObject(1, user_id);
+            statement.setInt(1, user_id);
             statement.execute();
         } catch (SQLException e) {
             log.error(String.valueOf(e));

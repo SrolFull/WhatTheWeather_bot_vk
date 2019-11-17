@@ -14,7 +14,7 @@ public class Subscribe extends Command {
 
     @Override
     public void exec(@NotNull Message message) {
-        VKServer.UsersDb.addSubcriber(message.getUserId());
+        VKServer.UsersDb.addSubcriber(message.getUserId(), message.getBody().split(" ")[1]);
         new VKManager().sendMessage("You subscribed", message.getUserId());
     }
 }

@@ -19,16 +19,22 @@ public class Weather extends Command {
 
     @Override
     public void exec(@NotNull Message message) {
-        new VKManager().sendMessage(getWeather(), message.getUserId());
+        String[] bodyPart = message.getBody().split(" ");
+        try{
+            new VKManager().sendMessage(getWeather(bodyPart[1]), message.getUserId());
+        }catch (ArrayIndexOutOfBoundsException e)
+        {
+            new SpecifyCity().exec(message);
+        }
     }
-    public static void exec(@NotNull Integer user_id){
-        new VKManager().sendMessage(getWeather(),user_id);
+    public static void exec(@NotNull Integer user_id, String city){
+        new VKManager().sendMessage(getWeather(city),user_id);
     }
 
-    private static String getWeather(){
+    private static String getWeather(String city){
         String weather;
         try {
-            weather = new WeatherParser().getWeatherTodayDescription();
+            weather = new WeatherParser(city).getWeatherTodayDescription(city);
         } catch (IOException e) {
             weather = "не удалось получить погоду";
             log.error(String.valueOf(e));
