@@ -14,7 +14,12 @@ public class Subscribe extends Command {
 
     @Override
     public void exec(@NotNull Message message) {
-        VKServer.UsersDb.addSubcriber(message.getUserId(), message.getBody().split(" ")[1]);
-        new VKManager().sendMessage("You subscribed", message.getUserId());
+        boolean isNewSubscribe = VKServer.usersDataBase.addSubcriber(message.getUserId(), message.getBody().split(" ")[1]);
+        if (isNewSubscribe)
+            new VKManager().sendMessage("You subscribed", message.getUserId());
+        else
+            new VKManager().sendMessage("You just subscribed", message.getUserId());
+            new VKManager().sendMessage("If you wanna change the city use \"Unsubscribe\"",message.getUserId());
+            new VKManager().sendMessage("And subscribe again",message.getUserId());
     }
 }

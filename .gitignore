@@ -1,7 +1,5 @@
 src/main/resources/vkconfig.properties
+src/test/
 .idea/
 .gradle/
 build/
-out/
-lib/
-*.jar
