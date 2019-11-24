@@ -12,7 +12,7 @@ public class RemindTask extends TimerTask {
         SendMessages();
     }
     private static void SendMessages(){
-        Map<Integer, String> Subs = VKServer.UsersDb.getSubscribers();
+        Map<Integer, String> Subs = VKServer.usersDataBase.getSubscribers();
         Subs.forEach(Weather::exec);
     }
 }

@@ -17,7 +17,7 @@ public class Help extends Command {
         Integer usr_id = message.getUserId();
         new VKManager().sendMessage("Available commands:", usr_id);
         for (Command command : commands){
-            new VKManager().sendMessage("*"+command.getName(),usr_id);
+            new VKManager().sendMessage(command.getName(),usr_id);
         }
     }
 }

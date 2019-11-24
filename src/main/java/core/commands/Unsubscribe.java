@@ -14,7 +14,7 @@ public class Unsubscribe extends Command {
 
     @Override
     public void exec(@NotNull Message message) {
-        VKServer.UsersDb.deleteSubscriber(message.getUserId());
+        VKServer.usersDataBase.deleteSubscriber(message.getUserId());
         new VKManager().sendMessage("You unsubscribed", message.getUserId());
     }
 }
