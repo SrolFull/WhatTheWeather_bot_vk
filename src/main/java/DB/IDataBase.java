@@ -1,15 +1,17 @@
 package DB;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vk.VKServer;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
 interface IDataBase {
-    Logger LOG = LoggerFactory.getLogger(DataBase.class);
+    Logger LOG = LogManager.getLogger(IDataBase.class);
     String CON_STR = "jdbc:sqlite:SQLite/subscribers.db";
 
 

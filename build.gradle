@@ -13,8 +13,6 @@ task fatJar(type: Jar) {
 
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
@@ -26,7 +24,11 @@ dependencies {
     compile 'com.vk.api:sdk:0.5.12'
 }
 dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '2+'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8'
+}
+dependencies {
+    compile 'org.slf4j:slf4j-nop:1.7.25'
 }
 dependencies {
     compile 'org.jetbrains:annotations:17.0.0'
@@ -36,8 +38,4 @@ dependencies{
 }
 dependencies{
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.7.2'
-}
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }

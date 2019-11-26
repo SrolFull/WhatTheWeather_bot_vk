@@ -6,18 +6,20 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.Message;
 import file.ReadCity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import static java.util.concurrent.Executors.newCachedThreadPool;
 
 
 public class VKServer {
-    private static final Logger log = LoggerFactory.getLogger(VKServer.class);
+    private final static Logger LOG = LogManager.getLogger(VKServer.class);
     private static VKCore vkCore;
     public static DataBase usersDataBase;
     public static List<String> Cites;
@@ -26,17 +28,19 @@ public class VKServer {
         try {
             vkCore = new VKCore();
         } catch (ApiException | ClientException e) {
-            log.error(String.valueOf(e));
+            LOG.error(String.valueOf(e));
         }
     }
 
     public static void main(String[] args) throws NullPointerException, ApiException, InterruptedException, SQLException {
-        log.info("Running server...");
+        LOG.info("Get cities list");
         Cites = ReadCity.getCites();
         //create Notifier for subscribe
-         new Notifier().Create();
+        new Notifier().Create();
         //initialize db
+        LOG.info("Initialize DataBase");
         usersDataBase = DataBase.getInstance();
+        LOG.info("Server Running");
         while (true) {
             Thread.sleep(300);
             try {
@@ -46,9 +50,9 @@ public class VKServer {
                     exec.execute(new Messanger(message));
                 }
             } catch (ClientException e) {
-                log.error(String.valueOf(e));
+                LOG.error(String.valueOf(e));
                 final int RECONNECT_TIME = 10000;
-                log.info("Повторное соединение через " + RECONNECT_TIME / 1000 + " секунд");
+                LOG.info("Повторное соединение через " + RECONNECT_TIME / 1000 + " секунд");
                 Thread.sleep(RECONNECT_TIME);
             }
         }
