@@ -1,5 +1,6 @@
 package core.commands;
 
+import DB.DataBase;
 import com.vk.api.sdk.objects.messages.Message;
 import core.Command;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,7 @@ public class Unsubscribe extends Command {
 
     @Override
     public void exec(@NotNull Message message) {
-        VKServer.usersDataBase.deleteSubscriber(message.getUserId());
+        VKServer.usersDataBase.deleteSubscriber(DataBase.connection,message.getUserId());
         new VKManager().sendMessage("You unsubscribed", message.getUserId());
     }
 }

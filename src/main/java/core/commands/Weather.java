@@ -3,14 +3,16 @@ package core.commands;
 import com.vk.api.sdk.objects.messages.Message;
 import core.Command;
 import core.modules.WeatherParser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vk.VKManager;
+import vk.VKServer;
 
 import java.io.IOException;
 public class Weather extends Command {
-    private static final Logger log = LoggerFactory.getLogger(Weather.class);
+    private final static Logger LOG = LogManager.getLogger(Weather.class);
 
 
     public Weather() {
@@ -37,7 +39,7 @@ public class Weather extends Command {
             weather = new WeatherParser(city).getWeatherTodayDescription(city);
         } catch (IOException e) {
             weather = "не удалось получить погоду";
-            log.error(String.valueOf(e));
+            LOG.error(String.valueOf(e));
         }
         return weather;
     }

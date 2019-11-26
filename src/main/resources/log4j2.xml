@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration status = "warn">
     <Appenders>
-        <File name="LogToFile" fileName="logs/log4j2.log">
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </File>
+        <RollingFile name="fileLogger" fileName="logs/log4j2.log" filePattern="%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </Console>
     </Appenders>
-    <Logger name="com.vk.api.sdk.httpclient.HttpTransportClient" level="ERROR" />
     <Loggers>
-        <Root level="trace">
-            <AppenderRef ref="LogToFile"/>
+        <Logger name="vk.VKServer" level="debug" additivity="true">
+            <appender-ref ref="fileLogger" level="error" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <appender-ref ref="console" />
         </Root>
     </Loggers>
 </Configuration>

@@ -8,7 +8,8 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.messages.Message;
 import com.vk.api.sdk.queries.messages.MessagesGetLongPollHistoryQuery;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Properties;
 
 class VKCore {
-    private final Logger log = LoggerFactory.getLogger(VKCore.class);
+    private final static Logger LOG = LogManager.getLogger(VKCore.class);
     private VkApiClient vk;
     private static int ts;
     private GroupActor actor;
@@ -37,7 +38,7 @@ class VKCore {
             actor = new GroupActor(groupId, access_token);
             ts = vk.messages().getLongPollServer(actor).execute().getTs();
         } catch (IOException e) {
-            log.error(e+"ощибка загрузки файла конфигураций");
+            LOG.error(e+"ощибка загрузки файла конфигураций");
         }
     }
 
@@ -63,7 +64,7 @@ class VKCore {
                         .execute()
                         .getTs();
             } catch (ClientException e) {
-                log.error(String.valueOf(e));
+                LOG.error(String.valueOf(e));
             }
         }
         if (!messages.isEmpty() && !messages.get(0).isOut()) {
