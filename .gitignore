@@ -1,4 +1,3 @@
-src/main/resources/vkconfig.properties
 src/test/
 .idea/
 .gradle/
