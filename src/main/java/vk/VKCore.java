@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -33,6 +34,7 @@ class VKCore {
         String access_token;
         try {
             prop.load(new FileInputStream("src/main/resources/vkconfig.properties"));
+            if (prop.isEmpty())  prop.load(new FileInputStream("src/main/resources/defaultvk.properties"));
             groupId = Integer.parseInt(prop.getProperty("groupId"));
             access_token = prop.getProperty("accessToken");
             actor = new GroupActor(groupId, access_token);

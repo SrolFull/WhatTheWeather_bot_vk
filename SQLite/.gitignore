@@ -1,4 +1,4 @@
-src/main/resources/vkconfig.properties
+vkconfig.properties
 .idea/
 .gradle/
 build/
